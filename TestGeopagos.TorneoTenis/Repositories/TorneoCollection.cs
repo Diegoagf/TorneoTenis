@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestGeopagos.TorneoTenis.Models;
+using static TestGeopagos.TorneoTenis.Models.JugadorDTO;
 
 namespace TestGeopagos.TorneoTenis.Repositories
 {
@@ -16,16 +17,9 @@ namespace TestGeopagos.TorneoTenis.Repositories
         public TorneoCollection()
         {
             Collection = _repository.db.GetCollection<TorneoDTO>("Torneos");
-        }
+        }      
 
-        public async Task ActualizarTorneo(TorneoDTO torneo) // REVISAR SI CONVIENE
-        {
-            var filtro = Builders<TorneoDTO>.Filter
-                                            .Eq(t => t.Id, torneo.Id);
-            await Collection.ReplaceOneAsync(filtro, torneo);
-        }
-
-        public async Task EliminarTorneo(string id) // REVISAR SI CONVIENE
+        public async Task EliminarTorneo(string id) // EXTRA
         {
             var filtro = Builders<TorneoDTO>.Filter.Eq(t => t.Id, new ObjectId(id));
             await Collection.DeleteOneAsync(filtro);
@@ -41,6 +35,16 @@ namespace TestGeopagos.TorneoTenis.Repositories
                 return await Collection.FindAsync(new BsonDocument()).Result.ToListAsync();
         }
 
+        public async Task<List<TorneoDTO>> ObtenerTorneoPorGenero(Genero sexo)
+        {
+            var filtro = Builders<TorneoDTO>.Filter.Eq(t => t.Tipo_Torneo, sexo);
+            return await Collection.FindAsync(filtro).Result.ToListAsync();
+        }
+        public async Task<List<TorneoDTO>> ObtenerTorneoPorFecha(DateTime fecha)
+        {
+            var filtro = Builders<TorneoDTO>.Filter.Eq(t => t.Fecha_Torneo,(fecha));
+            return await Collection.FindAsync(filtro).Result.ToListAsync();
+        }
         public async Task<TorneoDTO> ObtenerTorneoPorId(string id)
         {
             return await Collection.FindAsync(

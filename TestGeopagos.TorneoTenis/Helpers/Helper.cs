@@ -30,5 +30,17 @@ namespace TestGeopagos.TorneoTenis.Helpers
             
             return responseTorneo;
         }
+
+        internal static Genero RetornarGenero(int genero)
+        {           
+            if (genero == 1)
+            {
+                return Genero.Masculino;
+            }
+            else
+            {
+                return Genero.Femenino;
+            }           
+        }
     }
 }

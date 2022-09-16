@@ -9,7 +9,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using TestGeopagos.TorneoTenis.Repositories;
 using TestGeopagos.TorneoTenis.Services;
@@ -46,8 +48,12 @@ namespace TestGeopagos.TorneoTenis
                         Url = new Uri("https://github.com/Diegoagf/TorneoTenis"),
                         Email = "alfonzoferrer97@gmail.com"
                     }
-                }); ;
+                });
+                // Para habilitar los comentarios en el swagger
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
