@@ -18,7 +18,10 @@ namespace TestGeopagos.TorneoTenis.Controllers
         {
             _JugadoresService = JugadoresService;
         }
-        // GET: api/<JugadoresController>
+        /// <summary>
+        /// Obtiene una lista de jugadores Masculino al azar
+        /// </summary>
+        /// <returns>Retorna una lista de Jugadores masculino</returns>
         [HttpGet("masculino")]
         public JsonResult ObtenerJugadoresMasculino()
         {
@@ -32,6 +35,10 @@ namespace TestGeopagos.TorneoTenis.Controllers
             }
             
         }
+        /// <summary>
+        /// Obtiene una lista de jugadores Femeninos al azar
+        /// </summary>
+        /// <returns>Retorna una lista de Jugadores femenino</returns>
         [HttpGet("femenino")]
         public JsonResult ObtenerJugadoresFemenino()
         {

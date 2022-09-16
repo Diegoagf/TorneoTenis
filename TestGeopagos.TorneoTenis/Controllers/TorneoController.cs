@@ -26,7 +26,10 @@ namespace TestGeopagos.TorneoTenis.Controllers
             _db = db;
         }
 
-
+        /// <summary>
+        /// Obtiene todos los torneos jugados
+        /// </summary>
+        /// <returns>Retorna Lista de todos los Torneos</returns>
         [HttpGet("obtener-todos")]
         public async Task<IActionResult> ObtenerTodos()
         {
@@ -39,7 +42,11 @@ namespace TestGeopagos.TorneoTenis.Controllers
                 return new JsonResult(e.Message);
             }
         }
-
+        /// <summary>
+        /// Obtiene el torneo por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna un torneo</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> ObtenerTorneo(string id)
         {
@@ -52,7 +59,11 @@ namespace TestGeopagos.TorneoTenis.Controllers
                 return new JsonResult(e.Message);
             }
         }
-
+        /// <summary>
+        /// Obtiene todos los torneos Masculino o Femenino
+        /// </summary>
+        /// <param name="genero"></param>
+        /// <returns>Lista de Torneos por genero</returns>
         [HttpGet()]
         public async Task<IActionResult> ObtenerTorneoPorGenero([FromQuery]int genero)
         {
@@ -70,6 +81,11 @@ namespace TestGeopagos.TorneoTenis.Controllers
                 return new JsonResult(e.Message);
             }
         }
+        /// <summary>
+        /// Obtiene todos los torneos de la fecha consultada
+        /// </summary>
+        /// <param name="fecha"></param>
+        /// <returns>Lista de Troneos de la fecha</returns>
         [HttpGet("fecha/{fecha}")]
         public async Task<IActionResult> ObtenerTorneoPorFecha(string fecha)
         {
@@ -92,7 +108,7 @@ namespace TestGeopagos.TorneoTenis.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /Prueba
+        ///    
         ///     {
         ///       "tipo_Torneo": 1,
         ///       [
@@ -147,9 +163,9 @@ namespace TestGeopagos.TorneoTenis.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /Prueba
+        ///     
         ///     {
-        ///       "tipo_Torneo": 1,
+        ///       "tipo_Torneo": 0,
         ///       [
         ///             {
         ///             "fuerza": 82,
