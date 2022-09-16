@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,21 @@ namespace TestGeopagos.TorneoTenis
             services.AddTransient<ISimularTorneoService, SimularTorneoService>(); //REVISAR
             services.AddTransient<IJugadoresService, JugadoresService>();       // REVISAR
             services.AddTransient<ITorneoCollection, TorneoCollection>();       // REVISAR
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Torneos-Tenis",
+                    Description = "Api para simular Torneos en base a jugadores",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Diego Gonzalez",
+                        Url = new Uri("https://github.com/Diegoagf/TorneoTenis"),
+                        Email = "alfonzoferrer97@gmail.com"
+                    }
+                }); ;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,6 +62,9 @@ namespace TestGeopagos.TorneoTenis
             app.UseRouting();
 
             app.UseAuthorization();
+           
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseEndpoints(endpoints =>
             {
