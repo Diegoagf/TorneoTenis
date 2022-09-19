@@ -9,7 +9,6 @@ using TestGeopagos.TorneoTenis.Models;
 using TestGeopagos.TorneoTenis.Repositories;
 using TestGeopagos.TorneoTenis.Services;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TestGeopagos.TorneoTenis.Controllers
 {
@@ -17,13 +16,19 @@ namespace TestGeopagos.TorneoTenis.Controllers
     [ApiController]
     public class TorneoController : ControllerBase
     {
-        private ITorneoCollection _db;
+        //private ITorneoCollection _db;
         private readonly ISimularTorneoService _simularTorneo;
+        private readonly ITorneosRepository _db;
         int[] generos = new int[] {0,1}; //REVISAR
-        public TorneoController(ISimularTorneoService simularTorneo, ITorneoCollection db)
+        //public TorneoController(ISimularTorneoService simularTorneo, ITorneoCollection db)
+        //{
+        //    _simularTorneo = simularTorneo;
+        //    _db = db;
+        //}
+        public TorneoController(ISimularTorneoService simulartorneo, ITorneosRepository TorneoRepository)
         {
-            _simularTorneo = simularTorneo;
-            _db = db;
+            _simularTorneo = simulartorneo;
+            _db = TorneoRepository;
         }
 
         /// <summary>
@@ -31,28 +36,11 @@ namespace TestGeopagos.TorneoTenis.Controllers
         /// </summary>
         /// <returns>Retorna Lista de todos los Torneos</returns>
         [HttpGet("obtener-todos")]
-        public async Task<IActionResult> ObtenerTodos()
+        public async Task<IActionResult> ObtenerTorneos()
         {
             try
             {
                 return Ok(await _db.ObtenerTodos());
-            }
-            catch (Exception e)
-            {
-                return new JsonResult(e.Message);
-            }
-        }
-        /// <summary>
-        /// Obtiene el torneo por id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Retorna un torneo</returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> ObtenerTorneo(string id)
-        {
-            try
-            {
-                return Ok(await _db.ObtenerTorneoPorId(id));
             }
             catch (Exception e)
             {
@@ -65,7 +53,7 @@ namespace TestGeopagos.TorneoTenis.Controllers
         /// <param name="genero"></param>
         /// <returns>Lista de Torneos por genero</returns>
         [HttpGet()]
-        public async Task<IActionResult> ObtenerTorneoPorGenero([FromQuery]int genero)
+        public async Task<IActionResult> ObtenerTorneoPorGenero([FromQuery] int genero)
         {
             try
             {
@@ -81,6 +69,7 @@ namespace TestGeopagos.TorneoTenis.Controllers
                 return new JsonResult(e.Message);
             }
         }
+
         /// <summary>
         /// Obtiene todos los torneos de la fecha consultada
         /// </summary>
@@ -91,8 +80,6 @@ namespace TestGeopagos.TorneoTenis.Controllers
         {
             try
             {
-
-                
 
                 return Ok(await _db.ObtenerTorneoPorFecha(DateTime.Parse(fecha)));
             }
@@ -146,7 +133,7 @@ namespace TestGeopagos.TorneoTenis.Controllers
                     return BadRequest(ModelState);
                 }
                 ResponseTorneoDTO response = Helpers.Helper.ArmarRespuesta(_simularTorneo.SimularTorneoMasculino(Request.Jugadores),Request.Tipo_Torneo);
-                await _db.InsertarTorneo(response.Torneo_Realizado);
+                await _db.Insertar(response.Torneo_Realizado);
                 return Created("Exito", response);
             }
             catch (Exception e)
@@ -200,7 +187,7 @@ namespace TestGeopagos.TorneoTenis.Controllers
                     return BadRequest(ModelState);
                 }
                 ResponseTorneoDTO response = Helpers.Helper.ArmarRespuesta(_simularTorneo.SimularTorneoFemenino(Request.Jugadores), Request.Tipo_Torneo);
-                await _db.InsertarTorneo(response.Torneo_Realizado);
+                await _db.Insertar(response.Torneo_Realizado);
                 return Created("Exito",response);
             }
             catch (Exception e)

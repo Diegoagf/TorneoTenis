@@ -7,14 +7,9 @@ using static TestGeopagos.TorneoTenis.Models.JugadorDTO;
 
 namespace TestGeopagos.TorneoTenis.Repositories
 {
-    public interface ITorneoCollection
+    public interface ITorneosRepository: IBaseRepository<TorneoDTO>
     {
-        Task InsertarTorneo(TorneoDTO torneo);
         Task<List<TorneoDTO>> ObtenerTorneoPorGenero(Genero sexo);
         Task<List<TorneoDTO>> ObtenerTorneoPorFecha(DateTime fecha);
-        Task EliminarTorneo(string id); // Extra
-        Task<List<TorneoDTO>> ObtenerTodos();
-        Task<TorneoDTO> ObtenerTorneoPorId(string id);
-
     }
 }

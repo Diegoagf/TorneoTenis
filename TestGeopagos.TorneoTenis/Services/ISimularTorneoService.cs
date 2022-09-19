@@ -8,7 +8,7 @@ namespace TestGeopagos.TorneoTenis.Services
 {
     public interface ISimularTorneoService
     {
-        public JugadorMasculinoDTO SimularTorneoMasculino(List<JugadorMasculinoDTO> jugadores);
-        public JugadorFemeninoDTO SimularTorneoFemenino(List<JugadorFemeninoDTO> jugadores);
+        JugadorMasculinoDTO SimularTorneoMasculino(List<JugadorMasculinoDTO> jugadores);
+        JugadorFemeninoDTO SimularTorneoFemenino(List<JugadorFemeninoDTO> jugadores);
     }
 }
