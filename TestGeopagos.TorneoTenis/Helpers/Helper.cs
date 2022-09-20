@@ -24,11 +24,23 @@ namespace TestGeopagos.TorneoTenis.Helpers
             TorneoDTO torneo = new TorneoDTO();
             torneo.Tipo_Torneo = genero;
             torneo.Ganador_Torneo = GanadorTorneo.Nombre;
-            torneo.Fecha_Torneo = DateTime.Now;
+            torneo.Fecha_Torneo = DateTime.Now.Date;
             //torneo.Id = ObjectId.GenerateNewId();
             ResponseTorneoDTO responseTorneo = new ResponseTorneoDTO(TipoTorneo, torneo);
             
             return responseTorneo;
+        }
+
+        internal static Genero RetornarGenero(int genero)
+        {           
+            if (genero == 1)
+            {
+                return Genero.Masculino;
+            }
+            else
+            {
+                return Genero.Femenino;
+            }           
         }
     }
 }

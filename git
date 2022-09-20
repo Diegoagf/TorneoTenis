@@ -1,0 +1,23 @@
+[33mcommit 4e68715e3fab28f74c2dc1b95bf2f07220b70ab3[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Author: Diego <alfonzoferrer97@gmail.com>
+Date:   Thu Sep 15 23:56:07 2022 -0300
+
+    añadida consultas a la base
+
+[33mcommit 8dd22624e8e85fef933241f71e1218327ad80d5b[m
+Author: Diego <alfonzoferrer97@gmail.com>
+Date:   Thu Sep 15 21:31:09 2022 -0300
+
+    swagger añadido
+
+[33mcommit e6a6c8bb361114d398423627284a09f5c63f6199[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Diego <alfonzoferrer97@gmail.com>
+Date:   Thu Sep 15 01:28:51 2022 -0300
+
+    Version beta de api-rest
+
+[33mcommit 8bfc41be4f3a40e1571bad3314a3d41a1d4fb179[m
+Author: Diegoagf <89755909+Diegoagf@users.noreply.github.com>
+Date:   Thu Sep 15 01:24:29 2022 -0300
+
+    Initial commit

@@ -13,6 +13,7 @@ namespace TestGeopagos.TorneoTenis.Models
         [BsonId]
         public ObjectId Id { get; set; }
         public string Ganador_Torneo { get; set; }
+        [BsonDateTimeOptions(DateOnly =true)]
         public DateTime Fecha_Torneo { get; set; }
         public Genero Tipo_Torneo { get; set; }
     }
