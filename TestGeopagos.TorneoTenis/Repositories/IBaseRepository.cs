@@ -10,10 +10,7 @@ namespace TestGeopagos.TorneoTenis.Repositories
     public interface IBaseRepository<TEntity> where TEntity : class
     {
         Task Insertar(TEntity torneo);
-        //Task<List<TorneoDTO>> ObtenerTorneoPorGenero(Genero sexo);
-        //Task<List<TorneoDTO>> ObtenerTorneoPorFecha(DateTime fecha);
         Task Eliminar(string id); // Extra
         Task<IEnumerable<TEntity>>ObtenerTodos();
-        //Task<TorneoDTO> ObtenerTorneoPorId(string id);
     }
 }

@@ -33,9 +33,9 @@ namespace TestGeopagos.TorneoTenis
         {
             services.AddControllers();
             services.AddTransient<IMongoDBContext, MongoDBContext>();
-            services.AddTransient<ISimularTorneoService, SimularTorneoService>(); //REVISAR
-            services.AddTransient<IJugadoresService, JugadoresService>();       // REVISAR
-            services.AddTransient<ITorneosRepository, TorneosRepository>();       // REVISAR
+            services.AddTransient<ISimularTorneoService, SimularTorneoService>(); 
+            services.AddTransient<IJugadoresService, JugadoresService>();       
+            services.AddTransient<ITorneosRepository, TorneosRepository>();       
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo

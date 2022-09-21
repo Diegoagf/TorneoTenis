@@ -16,15 +16,9 @@ namespace TestGeopagos.TorneoTenis.Controllers
     [ApiController]
     public class TorneoController : ControllerBase
     {
-        //private ITorneoCollection _db;
         private readonly ISimularTorneoService _simularTorneo;
         private readonly ITorneosRepository _db;
-        int[] generos = new int[] {0,1}; //REVISAR
-        //public TorneoController(ISimularTorneoService simularTorneo, ITorneoCollection db)
-        //{
-        //    _simularTorneo = simularTorneo;
-        //    _db = db;
-        //}
+        int[] generos = new int[] {0,1};
         public TorneoController(ISimularTorneoService simulartorneo, ITorneosRepository TorneoRepository)
         {
             _simularTorneo = simulartorneo;

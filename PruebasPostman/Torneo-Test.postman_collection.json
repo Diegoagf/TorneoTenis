@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "9ef951b3-65a6-417b-aab8-dab7d33aa492",
+		"name": "Torneo-Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12291371"
+	},
+	"item": [
+		{
+			"name": "Masculino",
+			"item": [
+				{
+					"name": "SimularListaJugadores",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Tiempo de respuesta Menor a 3s\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"playerslist\", responseBody);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{azureurl}}/api/jugadores/masculino",
+							"host": [
+								"{{azureurl}}"
+							],
+							"path": [
+								"api",
+								"jugadores",
+								"masculino"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SimularTorneo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Tipo Torneo\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.tipo_Torneo).to.eql(\"Masculino\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test nombre Ganador\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.torneo_Realizado.ganador_Torneo).to.not.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo_Torneo\": 1,\r\n    \"jugadores\":{{playerslist}}\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{azureurl}}/api/torneo/masculino/simular",
+							"host": [
+								"{{azureurl}}"
+							],
+							"path": [
+								"api",
+								"torneo",
+								"masculino",
+								"simular"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Femenino",
+			"item": [
+				{
+					"name": "SimularListaJugadores",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"playerslist\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{azureurl}}/api/jugadores/femenino",
+							"host": [
+								"{{azureurl}}"
+							],
+							"path": [
+								"api",
+								"jugadores",
+								"femenino"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SimularTorneo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Tipo Torneo\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.tipo_Torneo).to.eql(\"Femenino\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test nombre Ganador\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.torneo_Realizado.ganador_Torneo).to.not.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Tipo_Torneo\":0,\r\n    \"Jugadores\":{{playerslist}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{azureurl}}/api/torneo/femenino/simular",
+							"host": [
+								"{{azureurl}}"
+							],
+							"path": [
+								"api",
+								"torneo",
+								"femenino",
+								"simular"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consulta",
+			"item": [
+				{
+					"name": "Obtener por fecha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var fecha = pm.request.url.path[3]\r",
+									"\r",
+									"pm.test(\"Test Fecha\", function () {\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.expect(jsonData[0].fecha_Torneo).to.contains(fecha);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{azureurl}}/api/torneo/fecha/2022-09-16",
+							"host": [
+								"{{azureurl}}"
+							],
+							"path": [
+								"api",
+								"torneo",
+								"fecha",
+								"2022-09-16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerTodos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test No vacio\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).length.to.greaterThan(1);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{azureurl}}/api/torneo/obtener-todos",
+							"host": [
+								"{{azureurl}}"
+							],
+							"path": [
+								"api",
+								"torneo",
+								"obtener-todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por genero",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var querygenero = parseInt(pm.request.url.query.get(\"genero\")); \r",
+									"\r",
+									"pm.test(\"Test genero\", function () {\r",
+									"     var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].tipo_Torneo).to.eql(querygenero);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{azureurl}}/api/torneo?genero=1",
+							"host": [
+								"{{azureurl}}"
+							],
+							"path": [
+								"api",
+								"torneo"
+							],
+							"query": [
+								{
+									"key": "genero",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "azureurl",
+			"value": "https://api-torneo-tenis.azurewebsites.net",
+			"type": "string"
+		}
+	]
+}
